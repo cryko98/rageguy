@@ -231,58 +231,47 @@
         <!-- FFFFUUUUUUUU ANIMATED BACKGROUND ELEMENTS (Filled by JS) -->
         <div id="fuuuu-container"></div>
 
-        <!-- HEADER AND NAVIGATION -->
+        <!-- HEADER AND NAVIGATION - RESTRUCTURED FOR COMPACTNESS -->
         <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
+            <!-- Fő sáv: Logo + Ticker és Cím -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3">
                 
-                <!-- LOGO and Ticker -->
-                <div class="flex items-center space-x-3">
+                <!-- LOGO and Ticker (bal oldali csoport) -->
+                <div class="flex items-center space-x-2 sm:space-x-3 min-w-0">
                     <img src="https://images.vexels.com/media/users/3/143599/isolated/preview/70e36dc21ac1c46c509eac5b600c22d9-rageguy-meme-face.png" 
-                        alt="Rage Guy Logo" class="w-10 h-10 rounded-full border-2 border-black">
-                    <!-- CSÖKKENTVE text-3xl-ről text-2xl-re -->
-                    <span class="text-2xl font-bold">$RAGE</span> 
-                </div>
-
-                <!-- Navigation Links (Desktop) -->
-                <div class="hidden md:flex items-center space-x-6 text-lg"> 
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage Meter</a> 
-                    <a href="#memes" class="nav-link">Memes</a>
-                    <a href="#manifesto" class="nav-link">Manifesto</a>
-                    <a href="#buy" class="nav-link">Buy</a>
-                    <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a>
-
-                    <!-- X.COM ICON ADDED HERE -->
-                    <a href="https://x.com/rageguyffuu?s=21" target="_blank" class="social-icon text-black transition-colors duration-200">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                        alt="Rage Guy Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-black flex-shrink-0">
+                    <!-- Csökkentett méret a helyspórolás érdekében (text-2xl) -->
+                    <span class="text-xl sm:text-2xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">$RAGE</span> 
+                    <a href="https://x.com/rageguyffuu?s=21" target="_blank" class="social-icon text-black transition-colors duration-200 ml-4 hidden sm:inline-block">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.901 1.153h3.684l-8.722 10.012 9.426 12.008h-7.653l-6.505-8.24-7.532 8.24H.322l8.287-9.524L0 1.153h8.319l5.228 6.947L18.901 1.153Zm-1.879 20.372h3.047L5.051 2.502H1.724l15.298 19.023Z"/>
                         </svg>
                     </a>
                 </div>
 
-                <!-- Token Address -->
-                <div class="flex items-center text-sm sm:text-base">
-                    <!-- Az XL helyett 2XL-nél jelenik meg a címke, hogy több hely maradjon a menünek -->
-                    <span class="mr-2 hidden 2xl:inline">Token Address:</span>
+                <!-- Token Address (jobb oldali csoport) -->
+                <div class="flex items-center text-sm sm:text-base ml-4">
                     <button id="copyButton" 
                             onclick="copyAddress('G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump')" 
-                            class="copy-button bg-black text-white px-2 py-2 text-xs sm:text-sm rounded-lg flex items-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50">
-                        <!-- Display full address on large screens, only abbreviated on small screens -->
-                        <span class="hidden sm:inline">G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump</span>
-                        <span class="sm:hidden">CA: G3FoX...</span>
-                        <svg id="copyIcon" class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v2"></path></svg>
+                            class="copy-button bg-black text-white px-2 py-1.5 text-xs sm:text-sm rounded-lg flex items-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 whitespace-nowrap">
+                        <!-- Cím csak rövidítve látszik mobilon, teljesen asztalon -->
+                        <span class="hidden md:inline">G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump</span>
+                        <span class="md:hidden">CA: G3FoX...</span>
+                        <svg id="copyIcon" class="w-4 h-4 ml-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v2"></path></svg>
                         <span id="copiedText" class="ml-2 hidden text-xs font-sans">Copied!</span>
                     </button>
                 </div>
-            </nav>
-            <!-- Navigation Links (Mobile) -->
-            <div class="md:hidden flex justify-around py-2 border-t border-gray-200 text-lg">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage</a> 
-                <a href="#memes" class="nav-link">Memes</a>
-                <a href="#manifesto" class="nav-link">Manifesto</a>
-                <a href="#buy" class="nav-link">Buy</a>
             </div>
+
+            <!-- Navigation Links (Alsó sáv: Külön sorban, hogy ne lógjon bele a cím) -->
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center md:justify-between py-2 border-t border-gray-200 text-lg md:text-xl">
+                <a href="#about" class="nav-link px-2">About</a>
+                <a href="#rage-meter" class="nav-link px-2 text-red-600 font-bold">Rage Meter</a> 
+                <a href="#memes" class="nav-link px-2">Memes</a>
+                <a href="#manifesto" class="nav-link px-2">Manifesto</a>
+                <a href="#buy" class="nav-link px-2">Buy</a>
+                <a href="#chart" class="nav-link px-2 text-red-600 font-bold">Chart</a>
+            </nav>
         </header>
 
         <!-- A max-w-7xl mx-auto a keretek szélesítését biztosítja -->
