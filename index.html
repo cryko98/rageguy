@@ -239,14 +239,14 @@
                 <div class="flex items-center space-x-3">
                     <img src="https://images.vexels.com/media/users/3/143599/isolated/preview/70e36dc21ac1c46c509eac5b600c22d9-rageguy-meme-face.png" 
                         alt="Rage Guy Logo" class="w-10 h-10 rounded-full border-2 border-black">
-                    <span class="text-3xl font-bold">$RAGE</span>
+                    <!-- CSÖKKENTVE text-3xl-ről text-2xl-re -->
+                    <span class="text-2xl font-bold">$RAGE</span> 
                 </div>
 
-                <!-- Navigation Links (Desktop) and X.com Link -->
-                <!-- space-x-4-ről space-x-6-ra módosítva a jobb elosztásért -->
-                <div class="hidden md:flex items-center space-x-6 text-xl">
+                <!-- Navigation Links (Desktop) -->
+                <div class="hidden md:flex items-center space-x-6 text-lg"> 
                     <a href="#about" class="nav-link">About</a>
-                    <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage Meter</a> <!-- UJ LINK -->
+                    <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage Meter</a> 
                     <a href="#memes" class="nav-link">Memes</a>
                     <a href="#manifesto" class="nav-link">Manifesto</a>
                     <a href="#buy" class="nav-link">Buy</a>
@@ -262,7 +262,8 @@
 
                 <!-- Token Address -->
                 <div class="flex items-center text-sm sm:text-base">
-                    <span class="mr-2 hidden xl:inline">Token Address (Solana CA):</span>
+                    <!-- Az XL helyett 2XL-nél jelenik meg a címke, hogy több hely maradjon a menünek -->
+                    <span class="mr-2 hidden 2xl:inline">Token Address (Solana CA):</span>
                     <button id="copyButton" 
                             onclick="copyAddress('G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump')" 
                             class="copy-button bg-black text-white px-2 py-2 text-xs sm:text-sm rounded-lg flex items-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50">
@@ -277,7 +278,7 @@
             <!-- Navigation Links (Mobile) -->
             <div class="md:hidden flex justify-around py-2 border-t border-gray-200 text-lg">
                 <a href="#about" class="nav-link">About</a>
-                <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage</a> <!-- UJ LINK -->
+                <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage</a> 
                 <a href="#memes" class="nav-link">Memes</a>
                 <a href="#manifesto" class="nav-link">Manifesto</a>
                 <a href="#buy" class="nav-link">Buy</a>
