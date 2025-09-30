@@ -63,7 +63,7 @@
             background-color: #f0f0f0;
         }
 
-        /* SPLASH SCREEN CUSTOM STYLES (FEHÉR) */
+        /* SPLASH SCREEN CUSTOM STYLES */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -77,7 +77,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #000000; /* Fekete szöveg a fehér háttéren */
+            color: #000000; /* Fekete szöveg */
             transition: opacity 0.5s ease;
         }
 
@@ -99,6 +99,21 @@
             -moz-user-select: none;
             -ms-user-select: none;
         }
+
+        /* Dexscreener Iframe fix for responsiveness */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* 1:1 aspect ratio, adjust as needed */
+        }
+        .chart-container iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -111,18 +126,18 @@
             PRESS & HOLD TO UNLEASH THE RAGE!
         </h1>
         
-        <!-- Interactive Image (ÚJ KÉP) -->
+        <!-- Interactive Image (Fő logó is lecserélve) -->
         <img id="rage-img" 
              src="https://images.vexels.com/media/users/3/143599/isolated/preview/70e36dc21ac1c46c509eac5b600c22d9-rageguy-meme-face.png" 
              alt="Rage Guy Face" 
              class="w-48 h-48 sm:w-64 sm:h-64 rounded-xl border-8 border-red-600 shadow-xl cursor-pointer transition-transform duration-100 hover:scale-105"
-             oncontextmenu="return false;"> <!-- Prevents right-click menu interfering -->
+             oncontextmenu="return false;"> 
 
         <p id="instruction-text" class="text-xl mt-6 text-gray-600">
             Hold for 3 seconds...
         </p>
 
-        <!-- Progress Bar (TEXT FILL MECHANISM) - UPDATED FOR SINGLE LINE -->
+        <!-- Progress Bar (TEXT FILL MECHANISM) -->
         <div id="progress-container" class="relative">
             
             <!-- Base Text Layer (The empty state - shows the single centered text in a light grey) -->
@@ -154,13 +169,13 @@
         <!-- FFFFUUUUUUUU ANIMATED BACKGROUND ELEMENTS (Filled by JS) -->
         <div id="fuuuu-container"></div>
 
-        <!-- HEADER AND NAVIGATION (Updated for responsiveness and Chart link) -->
+        <!-- HEADER AND NAVIGATION -->
         <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200">
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
                 
-                <!-- LOGO and Ticker -->
+                <!-- LOGO and Ticker (Lecserélve a kért logóra) -->
                 <div class="flex items-center space-x-3">
-                    <img src="https://static.wikia.nocookie.net/meme/images/c/c2/HD_Rage_Guy_v2-0.png/revision/latest?cb=20180806134814" 
+                    <img src="https://images.vexels.com/media/users/3/143599/isolated/preview/70e36dc21ac1c46c509eac5b600c22d9-rageguy-meme-face.png" 
                         alt="Rage Guy Logo" class="w-10 h-10 rounded-full border-2 border-black">
                     <span class="text-3xl font-bold">$RAGE</span>
                 </div>
@@ -171,10 +186,10 @@
                     <a href="#memes" class="nav-link">Memes</a>
                     <a href="#buy" class="nav-link">Buy</a>
                     <a href="#manifesto" class="nav-link">Manifesto</a>
-                    <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a> <!-- New Link -->
+                    <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a>
                 </div>
 
-                <!-- Token Address (Right side, clickable to copy - Improved responsiveness) -->
+                <!-- Token Address -->
                 <div class="flex items-center text-sm sm:text-base">
                     <span class="mr-2 hidden xl:inline">Token Address (Solana CA):</span>
                     <button id="copyButton" 
@@ -194,17 +209,18 @@
                 <a href="#memes" class="nav-link">Memes</a>
                 <a href="#buy" class="nav-link">Buy</a>
                 <a href="#manifesto" class="nav-link">Manifesto</a>
-                <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a> <!-- New Link -->
+                <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a>
             </div>
         </header>
 
-        <main class="max-w-4xl mx-auto px-4 py-12 space-y-24">
+        <!-- A max-w-7xl mx-auto a keretek szélesítését biztosítja -->
+        <main class="max-w-7xl mx-auto px-4 py-12 space-y-24"> 
 
-            <!-- MAIN TITLE AND CALL TO ACTION (Updated with GIF) -->
+            <!-- MAIN TITLE AND CALL TO ACTION -->
             <section class="text-center pt-8 md:pt-16">
-                <!-- New GIF element -->
-                <img src="https://media1.tenor.com/m/8t0GpHEHtukAAAAd/fuu-rage.gif" 
-                    alt="Fuuu Rage GIF" 
+                <!-- Fő logó is lecserélve -->
+                <img src="https://images.vexels.com/media/users/3/143599/isolated/preview/70e36dc21ac1c46c509eac5b600c22d9-rageguy-meme-face.png" 
+                    alt="Rage Guy Face" 
                     class="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-xl mb-4 border-4 border-black shadow-lg">
 
                 <h1 class="text-6xl sm:text-8xl font-black leading-none mb-6 text-red-600 animate-pulse">
@@ -227,23 +243,26 @@
                 </p>
             </section>
 
-            <!-- 2. LIVE CHART SECTION -->
+            <!-- 2. LIVE CHART SECTION (JAVÍTVA) -->
             <section id="chart" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     Live $RAGE Chart
                 </h2>
-                <!-- DEXSCREENER EMBED START -->
-                <style>#dexscreener-embed{position:relative;width:100%;padding-bottom:125%;}@media(min-width:1400px){#dexscreener-embed{padding-bottom:65%;}}#dexscreener-embed iframe{position:absolute;width:100%;height:100%;top:0;left:0;border:0;}</style><div id="dexscreener-embed"><iframe src="https://dexscreener.com/solana/4XUUrG5a7vHpotaAhF5fm9YCPpBcWDnjSmmYU61Sh6qR?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe></div>
+                <!-- DEXSCREENER EMBED START (Frissítve a megfelelő reszponzivitásért) -->
+                <div class="chart-container">
+                    <!-- A chart URL a $RAGE tokenhez a Solanán -->
+                    <iframe src="https://dexscreener.com/solana/G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump?embed=1&theme=dark&tabs=info&info=0&trades=0"></iframe>
+                </div>
                 <!-- DEXSCREENER EMBED END -->
             </section>
             
-            <!-- 3. MEMES (SLIDESHOW) -->
+            <!-- 3. MEMES (SLIDESHOW VÁLTÓGOMBOKKAL) -->
             <section id="memes" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     Top $RAGE Memes
                 </h2>
                 <div id="slideshow" class="relative w-full overflow-hidden rounded-lg border-2 border-black" style="height: 400px;">
-                    <!-- Slides for image placement, filled with user-provided URLs -->
+                    <!-- Slides for image placement -->
                     <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100">
                         <img src="https://pbs.twimg.com/media/G2D6Y-TXwAAY4cg?format=jpg&name=small" class="w-full h-full object-contain" alt="Rage Meme 1">
                     </div>
@@ -256,6 +275,15 @@
                     <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
                         <img src="https://pbs.twimg.com/media/G2CzE-UWcAAbs9L?format=jpg&name=small" class="w-full h-full object-contain" alt="Rage Meme 4">
                     </div>
+
+                    <!-- Previous Button -->
+                    <button onclick="plusSlides(-1)" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black text-white p-3 rounded-r-lg hover:bg-red-600 transition duration-300 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <!-- Next Button -->
+                    <button onclick="plusSlides(1)" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black text-white p-3 rounded-l-lg hover:bg-red-600 transition duration-300 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                 </div>
                 <p class="text-center mt-4 text-lg">More memes coming soon!</p>
             </section>
@@ -339,11 +367,11 @@
         const RAGE_IMG = document.getElementById('rage-img');
         const SPLASH_SCREEN = document.getElementById('splash-screen');
         const MAIN_CONTENT = document.getElementById('main-content');
-        const PROGRESS_CLIPPER = document.getElementById('progress-clipper'); // The element controlling the visible red text
+        const PROGRESS_CLIPPER = document.getElementById('progress-clipper'); 
         const INSTRUCTION_TEXT = document.getElementById('instruction-text');
         
         const HOLD_DURATION_MS = 3000;
-        const UPDATE_INTERVAL_MS = 50; // Update 20 times per second
+        const UPDATE_INTERVAL_MS = 50; 
 
         let startTime = 0;
         let intervalId = null;
@@ -361,12 +389,15 @@
             // Fade out splash screen and show main content
             setTimeout(() => {
                 SPLASH_SCREEN.style.opacity = '0';
+                // FIX: Make the splash screen non-interactive immediately after starting the fade-out
+                SPLASH_SCREEN.style.pointerEvents = 'none'; 
+                
                 setTimeout(() => {
                     SPLASH_SCREEN.classList.add('hidden');
                     MAIN_CONTENT.classList.remove('hidden');
                     // Ensure the main content animations start after load
                     initFuuuuu(); 
-                    showSlides();
+                    showSlides(slideIndex); // Start slideshow with manual control logic
                 }, 500); // Wait for fade transition
             }, 500);
         }
@@ -375,35 +406,31 @@
             clearInterval(intervalId);
             intervalId = null;
             startTime = 0;
-            PROGRESS_CLIPPER.style.width = '0%'; // Reset clipping
+            PROGRESS_CLIPPER.style.width = '0%'; 
             INSTRUCTION_TEXT.textContent = 'Hold for 3 seconds...';
-            RAGE_IMG.style.borderColor = '#ff0000'; // Reset image border to red
+            RAGE_IMG.style.borderColor = '#ff0000'; 
         }
 
         function handleMouseDown(event) {
             // Check for right-click (button 2) or middle-click (button 1)
             if (isUnlocked || (event.button !== undefined && event.button !== 0)) return; 
 
-            // Prevent touch event bubbling to prevent double-fire if both touch/mouse events are active
             if (event.type.startsWith('touch')) {
                 event.preventDefault(); 
             }
 
-            // Only proceed if not already holding
             if (intervalId) return;
 
             startTime = Date.now();
-            RAGE_IMG.style.transform = 'scale(0.95)'; // Visual feedback
-            RAGE_IMG.style.borderColor = '#0000ff'; // Blue while holding
+            RAGE_IMG.style.transform = 'scale(0.95)'; 
+            RAGE_IMG.style.borderColor = '#0000ff'; 
 
             intervalId = setInterval(() => {
                 const elapsedTime = Date.now() - startTime;
                 const progress = Math.min(100, (elapsedTime / HOLD_DURATION_MS) * 100);
                 
-                // Update clipper width to reveal red text
                 PROGRESS_CLIPPER.style.width = `${progress}%`;
                 
-                // Update instruction text
                 const remaining = (HOLD_DURATION_MS - elapsedTime) / 1000;
                 INSTRUCTION_TEXT.textContent = `Holding... ${Math.max(0, remaining).toFixed(1)}s left!`;
 
@@ -416,7 +443,7 @@
 
         function handleMouseUpOrLeave() {
             if (isUnlocked) return;
-            RAGE_IMG.style.transform = 'scale(1)'; // Visual reset
+            RAGE_IMG.style.transform = 'scale(1)'; 
             resetProgress();
         }
 
@@ -429,7 +456,7 @@
         RAGE_IMG.addEventListener('touchcancel', handleMouseUpOrLeave);
 
 
-        // --- GENERAL PAGE LOGIC (Existing functions) ---
+        // --- GENERAL PAGE LOGIC ---
 
         // Copy Token Address function
         function copyAddress(address) {
@@ -459,24 +486,35 @@
             }
         }
 
-        // Image Slideshow Logic
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        
-        function showSlides() {
+        // Image Slideshow Logic (Frissítve: manuális váltás gombokkal)
+        let slideIndex = 1; // Kezdő slide 1-től
+        let autoSlideTimeout;
+
+        function showSlides(n) {
+            const slides = document.querySelectorAll('#slideshow .slide');
             if (slides.length === 0) return;
 
+            // Handle wrap-around logic
+            if (n > slides.length) { slideIndex = 1 } 
+            if (n < 1) { slideIndex = slides.length }
+
+            // Hide all slides
             slides.forEach(slide => slide.style.opacity = '0');
 
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1; 
-            }
-
+            // Show the current slide
             slides[slideIndex - 1].style.opacity = '1';
-            
-            setTimeout(showSlides, 5000); 
+
+            // Reset auto-advance timer on manual click
+            clearTimeout(autoSlideTimeout);
+            // Re-set auto-advance to next slide after 5 seconds
+            autoSlideTimeout = setTimeout(() => plusSlides(1), 5000); 
         }
+
+        // Manual control function
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
 
         // FFFFUUUUUUUU Animated Background Logic
         function initFuuuuu() {
@@ -513,19 +551,14 @@
             }
         }
 
-        // ÚJ FUNKCIÓ: Biztosítja, hogy a kitöltött szöveg tökéletesen középen legyen, függetlenül a sáv méretétől.
+        // Biztosítja, hogy a kitöltött szöveg tökéletesen középen legyen, függetlenül a sáv méretétől.
         function fixClipperCentering() {
             const container = document.getElementById('progress-container');
             const innerText = document.getElementById('clipper-inner-text');
 
             if (!container || !innerText) return;
 
-            // Lekéri a progress-container tényleges pixel szélességét
             const containerWidth = container.offsetWidth;
-            
-            // Beállítja a belső kitöltő div szélességét a konténer szélességére. 
-            // Mivel a `progress-clipper` balról (`left: 0`) nő, a belső div-nek a teljes szélességű konténer 
-            // bal oldalához kell igazodnia a tökéletes átfedés érdekében.
             innerText.style.width = `${containerWidth}px`;
         }
 
