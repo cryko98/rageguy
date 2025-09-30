@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$RAGE - The Rage Guy Memecoin</title>
+    <!-- Tailwind CSS CDN for responsive and fast styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Permanent Marker for the hand-written, meme style -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Setting the requested "meme hand-written" font style */
+        body {
+            font-family: 'Permanent Marker', cursive;
+            background-color: #ffffff; /* Minimalist white background */
+            color: #000000;
+            overflow-x: hidden; /* Prevents horizontal scrolling due to the animation */
+        }
+
+        /* Defining the FFFFFUUUUUUUU animation */
+        @keyframes fuuuuAnimate {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.1; }
+            50% { opacity: 0.3; }
+            100% { transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--s)); opacity: 0.1; }
+        }
+
+        /* Background text style */
+        .fuuuu-text {
+            position: absolute;
+            font-size: 3rem; /* Base size */
+            color: #ff0000;
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.1;
+            white-space: nowrap;
+            animation: fuuuuAnimate 15s infinite alternate ease-in-out;
+            z-index: -10; /* Ensures it stays behind main content */
+        }
+
+        /* Navigation link styles */
+        .nav-link {
+            transition: color 0.2s, transform 0.2s;
+        }
+        .nav-link:hover {
+            color: #ff0000;
+            transform: scale(1.05);
+        }
+
+        /* Copy button style */
+        .copy-button {
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .copy-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Slideshow image containment */
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures the whole image is visible without cropping */
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FFFFUUUUUUUU ANIMATED BACKGROUND ELEMENTS (Filled by JS) -->
+    <div id="fuuuu-container"></div>
+
+    <!-- HEADER AND NAVIGATION (Updated for responsiveness and Chart link) -->
+    <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
+            
+            <!-- LOGO and Ticker -->
+            <div class="flex items-center space-x-3">
+                <img src="https://static.wikia.nocookie.net/meme/images/c/c2/HD_Rage_Guy_v2-0.png/revision/latest?cb=20180806134814" 
+                     alt="Rage Guy Logo" class="w-10 h-10 rounded-full border-2 border-black">
+                <span class="text-3xl font-bold">$RAGE</span>
+            </div>
+
+            <!-- Navigation Links (Desktop) -->
+            <div class="hidden md:flex space-x-4 text-xl">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#memes" class="nav-link">Memes</a>
+                <a href="#buy" class="nav-link">Buy</a>
+                <a href="#manifesto" class="nav-link">Manifesto</a>
+                <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a> <!-- New Link -->
+            </div>
+
+            <!-- Token Address (Right side, clickable to copy - Improved responsiveness) -->
+            <div class="flex items-center text-sm sm:text-base">
+                <span class="mr-2 hidden xl:inline">Token Address (Solana CA):</span>
+                <button id="copyButton" 
+                        onclick="copyAddress('G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump')" 
+                        class="copy-button bg-black text-white px-2 py-2 text-xs sm:text-sm rounded-lg flex items-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50">
+                    <!-- Display full address on large screens, only abbreviated on small screens -->
+                    <span class="hidden sm:inline">G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump</span>
+                    <span class="sm:hidden">CA: G3FoX...</span>
+                    <svg id="copyIcon" class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v2"></path></svg>
+                    <span id="copiedText" class="ml-2 hidden text-xs font-sans">Copied!</span>
+                </button>
+            </div>
+        </nav>
+        <!-- Navigation Links (Mobile) -->
+        <div class="md:hidden flex justify-around py-2 border-t border-gray-200 text-lg">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#memes" class="nav-link">Memes</a>
+            <a href="#buy" class="nav-link">Buy</a>
+            <a href="#manifesto" class="nav-link">Manifesto</a>
+            <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a> <!-- New Link -->
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12 space-y-24">
+
+        <!-- MAIN TITLE AND CALL TO ACTION (Updated with GIF) -->
+        <section class="text-center pt-8 md:pt-16">
+            <!-- New GIF element -->
+            <img src="https://media1.tenor.com/m/8t0GpHEHtukAAAAd/fuu-rage.gif" 
+                 alt="Fuuu Rage GIF" 
+                 class="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-xl mb-4 border-4 border-black shadow-lg">
+
+            <h1 class="text-6xl sm:text-8xl font-black leading-none mb-6 text-red-600 animate-pulse">
+                $RAGE
+            </h1>
+            <p class="text-3xl sm:text-4xl text-black">
+                The OG Meme That Never Dies. **CULTURE > MONEY.**
+            </p>
+        </section>
+
+        <!-- 1. ABOUT SECTION -->
+        <section id="about" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
+            <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
+                About: The Birth of Rage
+            </h2>
+            <p class="text-xl leading-relaxed">
+                **Rageguy** refers to the main character of a series of crudely-drawn comics typically consisting of four panes, portraying situations that can bring rage and exasperation, with the main character screaming with anger as a result.
+                <br><br>
+                Due to its simplicity and exploitability, Rageguy has been proven popular thus being evolved into a comic series now known as **Rage Comics**. This is not just a meme – it’s a cornerstone of internet culture, a timeless symbol of when you just feel **FFFFFUUUUUUUUU**.
+            </p>
+        </section>
+
+        <!-- 2. LIVE CHART SECTION (New - Now with live chart) -->
+        <section id="chart" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
+            <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
+                Live $RAGE Chart
+            </h2>
+            <!-- DEXSCREENER EMBED START -->
+            <style>#dexscreener-embed{position:relative;width:100%;padding-bottom:125%;}@media(min-width:1400px){#dexscreener-embed{padding-bottom:65%;}}#dexscreener-embed iframe{position:absolute;width:100%;height:100%;top:0;left:0;border:0;}</style><div id="dexscreener-embed"><iframe src="https://dexscreener.com/solana/4XUUrG5a7vHpotaAhF5fm9YCPpBcWDnjSmmYU61Sh6qR?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe></div>
+            <!-- DEXSCREENER EMBED END -->
+        </section>
+        
+        <!-- 3. MEMES (SLIDESHOW) -->
+        <section id="memes" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
+            <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
+                Top $RAGE Memes
+            </h2>
+            <div id="slideshow" class="relative w-full overflow-hidden rounded-lg border-2 border-black" style="height: 400px;">
+                <!-- Slides for image placement, filled with user-provided URLs -->
+                <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100">
+                    <img src="https://pbs.twimg.com/media/G2D6Y-TXwAAY4cg?format=jpg&name=small" class="w-full h-full object-contain" alt="Rage Meme 1">
+                </div>
+                <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
+                    <img src="https://pbs.twimg.com/media/G2EKMt1WQAAETeR?format=png&name=small" class="w-full h-full object-contain" alt="Rage Meme 2">
+                </div>
+                <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
+                    <img src="https://pbs.twimg.com/media/G2DE753XsAAnKcS?format=jpg&name=small" class="w-full h-full object-contain" alt="Rage Meme 3">
+                </div>
+                <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
+                    <img src="https://pbs.twimg.com/media/G2CzE-UWcAAbs9L?format=jpg&name=small" class="w-full h-full object-contain" alt="Rage Meme 4">
+                </div>
+            </div>
+            <p class="text-center mt-4 text-lg">More memes coming soon!</p>
+        </section>
+
+        <!-- 4. HOW TO BUY SECTION -->
+        <section id="buy" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
+            <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
+                How to Buy $RAGE on the Solana Blockchain
+            </h2>
+            <ol class="list-none space-y-6 text-xl">
+                <li class="p-3 border-b border-gray-300">
+                    <span class="text-red-600 font-extrabold mr-2">1. WALLET:</span> Get a Solana-compatible wallet like **Phantom**, **Solflare**, or **Trust Wallet**. Install the browser extension or app and save your recovery phrase!
+                </li>
+                <li class="p-3 border-b border-gray-300">
+                    <span class="text-red-600 font-extrabold mr-2">2. GET SOL:</span> Purchase **SOL (Solana)** tokens on a crypto exchange (e.g., Binance, Kraken, Coinbase). You need SOL to buy $RAGE and pay for transaction fees (gas).
+                </li>
+                <li class="p-3 border-b border-gray-300">
+                    <span class="text-red-600 font-extrabold mr-2">3. TRANSFER:</span> Send the purchased SOL to your wallet's Solana address.
+                </li>
+                <li class="p-3 border-b border-gray-300">
+                    <span class="text-red-600 font-extrabold mr-2">4. USE A DEX:</span> Open the in-wallet browser (DApps) section, or navigate to a decentralized exchange (**DEX**) like **Jupiter** or **Raydium**.
+                </li>
+                <li class="p-3 border-b border-gray-300">
+                    <span class="text-red-600 font-extrabold mr-2">5. TOKEN ADDRESS:</span> Paste the $RAGE token address: 
+                    <code class="bg-gray-200 p-1 rounded-md text-sm font-mono">G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump</code>
+                </li>
+                <li class="p-3">
+                    <span class="text-red-600 font-extrabold mr-2">6. CONNECT & SWAP:</span> Connect your wallet, select SOL in the top swap field and $RAGE in the bottom field. Set your **slippage** between 0.5% and 1%, and confirm the transaction. **CONGRATS, you now own $RAGE!**
+                </li>
+            </ol>
+        </section>
+
+        <!-- 5. MANIFESTO / RAGE CALL -->
+        <section id="manifesto" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
+            <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
+                The Manifesto: CULTURE > MONEY
+            </h2>
+            <p class="text-xl leading-relaxed italic border-l-4 border-red-600 pl-4">
+                This is not just another ticker, it’s a declaration that **MEMES > MONEY GRABS**.
+                <br><br>
+                It’s proof that conviction, history, and **CULTURE** can outlast every cabal, every KOL, every manipulator.
+                <br><br>
+                **$RAGE** is not another “coin of the week.” It’s:
+            </p>
+            <ul class="list-none space-y-3 mt-6 text-xl">
+                <li class="flex items-start">
+                    <span class="text-4xl leading-none mr-2 text-red-600">•</span>
+                    A face seen **BILLIONS** of times across the internet.
+                </li>
+                <li class="flex items-start">
+                    <span class="text-4xl leading-none mr-2 text-red-600">•</span>
+                    An OG meme with over a decade of cultural equity.
+                </li>
+                <li class="flex items-start">
+                    <span class="text-4xl leading-none mr-2 text-red-600">•</span>
+                    A grassroots movement that refuses to die, powered by people — not cabals, not cash.
+                </li>
+            </ul>
+            <p class="text-xl leading-relaxed mt-6">
+                This **CULT** is growing faster every day. Retail is waiting for the green light.
+                <br><br>
+                The only thing missing is **YOU** stepping in and giving them access. $RAGE isn’t a gamble, it’s history in motion and we don’t see you missing it.
+                <br><br>
+                <span class="text-3xl font-black text-red-600 block text-center mt-8">TOGETHER WE $RAGE. TOGETHER WE WIN.</span>
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 text-lg border-t-4 border-black mt-12">
+        &copy; 2025 $RAGE Memecoin. All Rage Reserved.
+    </footer>
+
+    <script>
+        // Copy Token Address function
+        function copyAddress(address) {
+            const tokenAddress = address.trim();
+            const tempInput = document.createElement('textarea');
+            tempInput.value = tokenAddress;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                // Using document.execCommand('copy') for cross-browser compatibility in iFrames
+                document.execCommand('copy');
+                
+                // Feedback to the user
+                const copyIcon = document.getElementById('copyIcon');
+                const copiedText = document.getElementById('copiedText');
+
+                copyIcon.classList.add('hidden');
+                copiedText.classList.remove('hidden');
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyIcon.classList.remove('hidden');
+                    copiedText.classList.add('hidden');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        // Image Slideshow Logic
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlides() {
+            // Hide all slides
+            slides.forEach(slide => slide.style.opacity = '0');
+
+            // Increment current slide index, looping back to 1 if necessary
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1; 
+            }
+
+            // Display the current slide
+            slides[slideIndex - 1].style.opacity = '1';
+            
+            // Repeat every 5 seconds
+            setTimeout(showSlides, 5000); 
+        }
+
+        // FFFFUUUUUUUU Animated Background Logic
+        function initFuuuuu() {
+            const fuuuuContainer = document.getElementById('fuuuu-container');
+            const text = "FFFFFUUUUUUUU";
+            const count = 15; // Number of animated text elements
+
+            for (let i = 0; i < count; i++) {
+                const span = document.createElement('span');
+                span.textContent = text;
+                span.className = 'fuuuu-text';
+
+                // Random position, rotation, and scale variables for the animation endpoint
+                const x = Math.random() * 200 - 100; 
+                const y = Math.random() * 200 - 100;
+                const rotate = Math.random() * 360 - 180;
+                const scale = 0.5 + Math.random() * 1.5;
+
+                // Random starting position
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+
+                span.style.left = `${startX}vw`;
+                span.style.top = `${startY}vh`;
+                span.style.fontSize = `${1.5 + Math.random() * 3.5}rem`;
+
+                // Set CSS variables for the animation
+                span.style.setProperty('--x', `${x}vw`);
+                span.style.setProperty('--y', `${y}vh`);
+                span.style.setProperty('--r', `${rotate}deg`);
+                span.style.setProperty('--s', `${scale}`);
+                span.style.animationDelay = `${Math.random() * -15}s`; // Stagger start times
+
+                fuuuuContainer.appendChild(span);
+            }
+        }
+
+
+        // Start initialization functions once the window has loaded
+        window.onload = function() {
+            showSlides();
+            initFuuuuu();
+        }
+    </script>
+
+</body>
+</html>
