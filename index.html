@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$RAGE - The Rage Guy Memecoin</title>
+    <!-- Favicon (Weboldal ikonja) beállítása a logóval -->
+    <link rel="icon" href="https://images.vexels.com/media/users/3/143599/isolated/preview/70e36dc21ac1c46c509eac5b600c22d9-rageguy-meme-face.png" type="image/png">
+    
     <!-- Tailwind CSS CDN for responsive and fast styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font - Permanent Marker for the hand-written, meme style -->
@@ -16,6 +19,7 @@
             background-color: #ffffff;
             color: #000000;
             overflow-x: hidden;
+            transition: background-color 0.1s; /* Transition for rage burst */
         }
 
         /* Defining the FFFFFUUUUUUUU animation */
@@ -118,6 +122,60 @@
             left: 0;
             border: 0;
         }
+
+        /* --- RAGE METER SPECIFIC STYLES --- */
+        #rage-meter-container {
+            height: 60px;
+            background-color: #fce7e7; /* Light red background */
+            border: 4px solid #000;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        #rage-meter-fill {
+            height: 100%;
+            background-color: #ff0000;
+            width: 0%;
+            /* Faster transition for responsiveness */
+            transition: width 0.1s linear; 
+        }
+        #rage-status {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            text-shadow: 1px 1px 0 #fff;
+            font-weight: bold;
+            font-size: 1.5rem;
+            z-index: 10;
+            pointer-events: none; /* Allows click to pass through to container */
+        }
+
+        /* Style for the visual climax (Rage Burst) */
+        .rage-burst-active {
+            /* Makes the entire body shake */
+            animation: rageShake 0.1s infinite alternate; 
+            background-color: #ff0000 !important;
+            color: #fff;
+            box-shadow: 0 0 30px #ff0000;
+        }
+        .rage-burst-active .rage-section {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        @keyframes rageShake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            25% { transform: translate(-1px, 1px) rotate(0.5deg); }
+            50% { transform: translate(1px, -1px) rotate(-0.5deg); }
+            75% { transform: translate(-1px, -1px) rotate(0.5deg); }
+            100% { transform: translate(1px, 1px) rotate(0deg); }
+        }
     </style>
 </head>
 <body>
@@ -185,10 +243,12 @@
                 </div>
 
                 <!-- Navigation Links (Desktop) and X.com Link -->
-                <div class="hidden md:flex items-center space-x-4 text-xl">
+                <!-- space-x-4-ről space-x-6-ra módosítva a jobb elosztásért -->
+                <div class="hidden md:flex items-center space-x-6 text-xl">
                     <a href="#about" class="nav-link">About</a>
+                    <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage Meter</a> <!-- UJ LINK -->
                     <a href="#memes" class="nav-link">Memes</a>
-                    <a href="#manifesto" class="nav-link">Manifesto</a> <!-- Megújult sorrend -->
+                    <a href="#manifesto" class="nav-link">Manifesto</a>
                     <a href="#buy" class="nav-link">Buy</a>
                     <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a>
 
@@ -217,10 +277,10 @@
             <!-- Navigation Links (Mobile) -->
             <div class="md:hidden flex justify-around py-2 border-t border-gray-200 text-lg">
                 <a href="#about" class="nav-link">About</a>
+                <a href="#rage-meter" class="nav-link text-red-600 font-bold">Rage</a> <!-- UJ LINK -->
                 <a href="#memes" class="nav-link">Memes</a>
-                <a href="#manifesto" class="nav-link">Manifesto</a> <!-- Megújult sorrend -->
+                <a href="#manifesto" class="nav-link">Manifesto</a>
                 <a href="#buy" class="nav-link">Buy</a>
-                <a href="#chart" class="nav-link text-red-600 font-bold">Chart</a>
             </div>
         </header>
 
@@ -243,7 +303,7 @@
             </section>
 
             <!-- 1. ABOUT SECTION -->
-            <section id="about" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
+            <section id="about" class="rage-section p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     About: The Birth of Rage
                 </h2>
@@ -254,8 +314,27 @@
                 </p>
             </section>
             
-            <!-- 2. MEMES (SLIDESHOW) -->
-            <section id="memes" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
+            <!-- 2. INTERACTIVE RAGE METER SECTION (ÚJ SZEKCIÓ) -->
+            <section id="rage-meter" class="rage-section p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
+                <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
+                    RAGE METER: Tap to FFFFUUUUUUUU!
+                </h2>
+                <p class="text-xl mb-4">
+                    Feeling the frustration? Release the inner $RAGE! Click or tap the meter repeatedly to reach 100% and unleash the primal scream!
+                </p>
+                <div id="rage-meter-container" 
+                     class="shadow-xl rounded-lg active:scale-[0.99] transition-transform duration-50">
+                    <!-- Rage Fill Bar -->
+                    <div id="rage-meter-fill" class="rounded-lg"></div>
+                    <!-- Status Text -->
+                    <div id="rage-status">Tap to build RAGE!</div>
+                </div>
+                <p id="rage-counter" class="text-center mt-4 text-sm text-gray-500">Rage Level: 0%</p>
+            </section>
+            <!-- END INTERACTIVE RAGE METER SECTION -->
+
+            <!-- 3. MEMES (SLIDESHOW) -->
+            <section id="memes" class="rage-section p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     Top $RAGE Memes
                 </h2>
@@ -286,8 +365,8 @@
                 <p class="text-center mt-4 text-lg">More memes coming soon!</p>
             </section>
             
-            <!-- 3. MANIFESTO / RAGE CALL (Megújult pozíció) -->
-            <section id="manifesto" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
+            <!-- 4. MANIFESTO / RAGE CALL -->
+            <section id="manifesto" class="rage-section p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#ff0000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     The Manifesto: CULTURE > MONEY
                 </h2>
@@ -321,8 +400,8 @@
                 </p>
             </section>
 
-            <!-- 4. HOW TO BUY SECTION -->
-            <section id="buy" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
+            <!-- 5. HOW TO BUY SECTION -->
+            <section id="buy" class="rage-section p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     How to Buy $RAGE on the Solana Blockchain
                 </h2>
@@ -349,12 +428,12 @@
                 </ol>
             </section>
 
-            <!-- 5. LIVE CHART SECTION (Legutolsó pozíció) -->
-            <section id="chart" class="p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
+            <!-- 6. LIVE CHART SECTION -->
+            <section id="chart" class="rage-section p-6 md:p-10 border-4 border-black rounded-xl shadow-[8px_8px_0_0_#000000] bg-white">
                 <h2 class="text-4xl font-bold mb-6 border-b-4 border-black pb-2 text-red-600">
                     Live $RAGE Chart
                 </h2>
-                <!-- DEXSCREENER EMBED START (Frissítve a megfelelő reszponzivitásért) -->
+                <!-- DEXSCREENER EMBED START -->
                 <div class="chart-container">
                     <!-- A chart URL a $RAGE tokenhez a Solanán -->
                     <iframe src="https://dexscreener.com/solana/G3FoXHoQDuGkEG8ZqQd7riC9uB1N51bg7JuxJEPNpump?embed=1&theme=dark&tabs=info&info=0&trades=0"></iframe>
@@ -389,6 +468,20 @@
         let intervalId = null;
         let isUnlocked = false;
 
+        // --- RAGE METER ELEMENTS ---
+        const BODY = document.body;
+        const RAGE_METER_CONTAINER = document.getElementById('rage-meter-container');
+        const RAGE_METER_FILL = document.getElementById('rage-meter-fill');
+        const RAGE_STATUS = document.getElementById('rage-status');
+        const RAGE_COUNTER_TEXT = document.getElementById('rage-counter');
+        
+        let currentRage = 0;
+        const MAX_RAGE = 100;
+        const RAGE_INCREMENT = 5; // How much rage is added per click
+        const RAGE_DECAY = 0.5; // How much rage decays per interval (0.5% every 100ms = 5% per second)
+        const DECAY_INTERVAL_MS = 100;
+        let decayInterval;
+
         function unlockPage() {
             if (isUnlocked) return;
             isUnlocked = true;
@@ -401,15 +494,21 @@
             // Fade out splash screen and show main content
             setTimeout(() => {
                 SPLASH_SCREEN.style.opacity = '0';
-                // FIX: Make the splash screen non-interactive immediately after starting the fade-out
                 SPLASH_SCREEN.style.pointerEvents = 'none'; 
                 
                 setTimeout(() => {
                     SPLASH_SCREEN.classList.add('hidden');
                     MAIN_CONTENT.classList.remove('hidden');
+                    
                     // Ensure the main content animations start after load
                     initFuuuuu(); 
                     showSlides(slideIndex); // Start slideshow with manual control logic
+
+                    // --- START RAGE METER LOGIC HERE ---
+                    RAGE_METER_CONTAINER.addEventListener('mousedown', handleRageMeterClick);
+                    RAGE_METER_CONTAINER.addEventListener('touchstart', handleRageMeterClick);
+                    startDecay();
+                    // --- END RAGE METER LOGIC HERE ---
                 }, 500); // Wait for fade transition
             }, 500);
         }
@@ -419,7 +518,6 @@
             intervalId = null;
             startTime = 0;
             PROGRESS_CLIPPER.style.width = '0%'; 
-            // MÓDOSÍTVA: 3 másodpercről 2 másodpercre
             INSTRUCTION_TEXT.textContent = 'Hold for 2 seconds...';
             RAGE_IMG.style.borderColor = '#ff0000'; 
         }
@@ -469,6 +567,80 @@
         RAGE_IMG.addEventListener('touchcancel', handleMouseUpOrLeave);
 
 
+        // --- RAGE METER FUNCTIONS ---
+
+        function updateMeterUI() {
+            const percentage = Math.min(MAX_RAGE, currentRage);
+            RAGE_METER_FILL.style.width = `${percentage}%`;
+            RAGE_COUNTER_TEXT.textContent = `Rage Level: ${percentage.toFixed(0)}%`;
+
+            if (currentRage >= MAX_RAGE) {
+                RAGE_STATUS.textContent = 'RAGE LEVEL MAXED! FFFFUUUUUUUU!!!';
+            } else if (currentRage > 75) {
+                RAGE_STATUS.textContent = 'CRITICAL RAGE!';
+            } else if (currentRage > 50) {
+                RAGE_STATUS.textContent = 'Building Rage...';
+            } else if (currentRage > 20) {
+                RAGE_STATUS.textContent = 'Slightly Annoyed.';
+            } else {
+                RAGE_STATUS.textContent = 'Tap to build RAGE!';
+            }
+        }
+
+        function handleRageMeterClick(event) {
+            // Prevent right-click from triggering rage
+            if (event.button !== undefined && event.button !== 0) return; 
+            
+            // Prevent long-press menu on mobile
+            if (event.type.startsWith('touch')) {
+                event.preventDefault(); 
+            }
+
+            if (currentRage >= MAX_RAGE) return;
+
+            currentRage = Math.min(MAX_RAGE, currentRage + RAGE_INCREMENT);
+            updateMeterUI();
+
+            if (currentRage === MAX_RAGE) {
+                triggerRageBurst();
+            }
+        }
+
+        function triggerRageBurst() {
+            // Visual feedback on max rage
+            BODY.classList.add('rage-burst-active');
+            
+            // Temporary freeze of decay for 3 seconds
+            clearInterval(decayInterval); 
+            
+            // Play sound effect if possible (using Tone.js as per instructions, but keeping it simple here)
+            // A simple placeholder for visual effect:
+            
+            setTimeout(() => {
+                // Remove visual feedback
+                BODY.classList.remove('rage-burst-active');
+                
+                // Reset rage and restart decay
+                currentRage = 0; 
+                updateMeterUI();
+                startDecay();
+
+            }, 3000); 
+        }
+
+        function decayRage() {
+            // Only decay if rage is not maxed out
+            if (currentRage > 0 && currentRage < MAX_RAGE) {
+                currentRage = Math.max(0, currentRage - RAGE_DECAY);
+                updateMeterUI();
+            }
+        }
+
+        function startDecay() {
+            if (decayInterval) clearInterval(decayInterval);
+            decayInterval = setInterval(decayRage, DECAY_INTERVAL_MS);
+        }
+
         // --- GENERAL PAGE LOGIC ---
 
         // Copy Token Address function
@@ -480,7 +652,8 @@
             tempInput.select();
             
             try {
-                document.execCommand('copy');
+                // Deprecated, but used for cross-iframe compatibility
+                document.execCommand('copy'); 
                 
                 const copyIcon = document.getElementById('copyIcon');
                 const copiedText = document.getElementById('copiedText');
@@ -499,35 +672,28 @@
             }
         }
 
-        // Image Slideshow Logic (Frissítve: manuális váltás gombokkal)
-        let slideIndex = 1; // Kezdő slide 1-től
+        // Image Slideshow Logic
+        let slideIndex = 1; 
         let autoSlideTimeout;
 
         function showSlides(n) {
             const slides = document.querySelectorAll('#slideshow .slide');
             if (slides.length === 0) return;
 
-            // Handle wrap-around logic
             if (n > slides.length) { slideIndex = 1 } 
             if (n < 1) { slideIndex = slides.length }
 
-            // Hide all slides
             slides.forEach(slide => slide.style.opacity = '0');
 
-            // Show the current slide
             slides[slideIndex - 1].style.opacity = '1';
 
-            // Reset auto-advance timer on manual click
             clearTimeout(autoSlideTimeout);
-            // Re-set auto-advance to next slide after 5 seconds
             autoSlideTimeout = setTimeout(() => plusSlides(1), 5000); 
         }
 
-        // Manual control function
         function plusSlides(n) {
             showSlides(slideIndex += n);
         }
-
 
         // FFFFUUUUUUUU Animated Background Logic
         function initFuuuuu() {
